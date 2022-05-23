@@ -63,7 +63,6 @@ HEADERS := \
 OBJS := \
 	arena.o \
 	debug.o \
-	dllhack.o \
 	g_ai.o \
 	g_cmds.o \
 	g_combat.o \
