@@ -1,6 +1,6 @@
 #include "g_local.h"
 
-#ifndef LINUX
+#ifndef __linux__
 #define WIN32_LEAN_AND_MEAN
 #include <winsock2.h >
 #else
@@ -50,7 +50,7 @@ struct sockaddr_in net_name_to_address(char *name)
 			addr.sin_addr   = *(struct in_addr *)host->h_addr;
 		}
 		else {
-#ifndef LINUX
+#ifndef __linux__
 			fprintf(stderr, "%s: %d", buf, WSAGetLastError());
 #else
 			fprintf(stderr, "%s: %s", buf, "net_name_to_addr");
@@ -81,7 +81,7 @@ int net_open_socket(void)
     int s;
 	
     if ((s = socket(AF_INET, SOCK_DGRAM, 0)) < 0) {
-#ifndef LINUX
+#ifndef __linux__
 		printf("WSA %d\n", WSAGetLastError());
 #else
 		perror("socket"); 
@@ -96,7 +96,7 @@ int net_open_socket(void)
 }
 void net_close_socket(int s)
 {
-#ifndef LINUX
+#ifndef __linux__
     if (s && closesocket(s) < 0) {
 #else
     if (s && close(s) < 0) {  
@@ -142,7 +142,7 @@ void GSOpenLog(void)
 	logname = gi.cvar("logname", "stdlog.log", 0);
     strcpy(mpath, gamedir->string);
 // NOTE: Change this if compiling for non-DOS!
-#ifdef LINUX
+#ifdef __linux__
         strcat(mpath, "/");
 #else
 		strcat(mpath, "\\");
@@ -275,7 +275,7 @@ void GSLogExit(edict_t *ent)
 		GSCloseLog();
 	}
 }
-#ifndef LINUX
+#ifndef __linux__
 int wsock32state(int mode)
 {
     if ( mode == 1 ) 
