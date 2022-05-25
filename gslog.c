@@ -31,7 +31,9 @@ struct sockaddr_in net_name_to_address(char *name)
 	
     memset(&addr, 0, sizeof(struct sockaddr_in));
 	
-    buf = strdup(name);
+    buf = malloc(strlen(name)+1);
+    strcpy(buf, name);
+
     strtok(buf, ":");
     if ((port = strtok(NULL, "")) != NULL) {
 		addr.sin_port = atoi(port);
