@@ -23,7 +23,7 @@ WINDRES ?= windres
 STRIP ?= strip
 RM ?= rm -f
 
-CFLAGS += -O2 -fno-strict-aliasing -g -Wno-unused-but-set-variable -fPIC -MMD $(INCLUDES)
+CFLAGS += -std=c99 -O2 -fno-strict-aliasing -g -Wno-unused-but-set-variable -fPIC -MMD $(INCLUDES)
 LDFLAGS ?= -shared
 LIBS ?= -lm -ldl
 
@@ -82,7 +82,6 @@ OBJS := \
 	g_turret.o \
 	g_utils.o \
 	g_weapon.o \
-	l_hook.o \
 	m_actor.o \
 	maploop.o \
 	marena.o \
