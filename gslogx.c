@@ -4,6 +4,14 @@
 #define WIN32_LEAN_AND_MEAN
 #include <winsock2.h >
 #else
+#include <netinet/in.h>
+#include <arpa/inet.h>
+#include <netdb.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/time.h>
+#define closesocket close
+#define h_addr h_addr_list[0]
 #endif
 
 FILE	*StdLogFile;		//GSLogMod
@@ -19,7 +27,9 @@ struct sockaddr_in net_name_to_address(char *name)
 	
     memset(&addr, 0, sizeof(struct sockaddr_in));
 	
-    buf = strdup(name);
+    buf = malloc(sizeof(name) + 1);
+    strcpy(buf, name);
+
     strtok(buf, ":");
     if ((port = strtok(NULL, "")) != NULL) {
 		addr.sin_port = atoi(port);
@@ -33,16 +43,16 @@ struct sockaddr_in net_name_to_address(char *name)
 		addr.sin_port = 0;
     }
 	
-#ifndef __linux__
+// #ifndef __linux__
 	if (inet_addr(buf) == INADDR_NONE) {
-#else
-	if (inet_addr(buf, (struct in_addr *)&addr.sin_addr) == INADDR_NONE) {
-#endif
+// #else
+	//if (inet_addr(buf, (struct in_addr *)&addr.sin_addr) == INADDR_NONE) {
+// #endif
 		if ((host = gethostbyname(buf)) != NULL) {
 			addr.sin_addr   = *(struct in_addr *)host->h_addr;
 		}
 		else {
-			fprintf(stderr, "%s: %d", buf, WSAGetLastError());
+			//fprintf(stderr, "%s: %d", buf, WSAGetLastError());
 			exit(1);
 		}
     }
@@ -69,7 +79,7 @@ int net_open_socket(void)
     int s;
 	
     if ((s = socket(AF_INET, SOCK_DGRAM, 0)) < 0) {
-		printf("WSA %d\n", WSAGetLastError());
+		//printf("WSA %d\n", WSAGetLastError());
 		exit(1);
     }
 	
