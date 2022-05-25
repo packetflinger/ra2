@@ -15,7 +15,9 @@
 #include <errno.h>
 #include <unistd.h>
 #include <sys/time.h>
-#include <string.h>   
+#include <string.h>
+
+#define h_addr  h_addr_list[0] 
 #endif
 
 FILE	*StdLogFile;		//GSLogMod
