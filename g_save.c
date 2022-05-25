@@ -211,7 +211,7 @@ void InitGame (void)
 		game.clients[i].resp.initialized = 0;
 	}
 	globals.num_edicts = game.maxclients+1;
-#ifndef LINUX
+#ifndef __linux__
 	if (!wsock32state(1))
 		gi.cvar_set("netlog",""); //arena;
 

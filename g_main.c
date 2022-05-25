@@ -69,7 +69,7 @@ void ShutdownGame (void)
 GSLogShutdown();//gslog
 	gi.FreeTags (TAG_LEVEL);
 	gi.FreeTags (TAG_GAME);
-#ifndef LINUX
+#ifndef __linux__
 	wsock32state(0); //arena;
 #endif
 }

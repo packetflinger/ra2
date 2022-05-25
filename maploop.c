@@ -555,7 +555,7 @@ void load_config(int num_arenas)
         gamedir = gi.cvar("game", ".", CVAR_LATCH);
         strcpy(mpath, gamedir->string);
 // NOTE: Change this if compiling for non-DOS!
-#ifdef LINUX
+#ifdef __linux__
         strcat(mpath, "/arena.cfg");
 #else
 		strcat(mpath, "\\arena.cfg");
@@ -660,7 +660,7 @@ void load_motd(void)
         strcpy(mpath, gamedir->string);
 // NOTE: Change this if compiling for non-DOS!
 
-#ifdef LINUX
+#ifdef __linux__
         strcat(mpath, "/motd.txt");
 #else
         strcat(mpath, "\\motd.txt");
@@ -672,7 +672,7 @@ void load_motd(void)
 				return;
         } else
 			gi.dprintf("Sucessfully read %s\n", mpath);
-#ifdef LINUX
+#ifdef __linux__
 		maps = gi.TagMalloc(2048, TAG_LEVEL);
 #else
         fstat(fileno(fp), &st);

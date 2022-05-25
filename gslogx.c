@@ -1,6 +1,6 @@
 #include "g_local.h"
 
-#ifndef LINUX
+#ifndef __linux__
 #define WIN32_LEAN_AND_MEAN
 #include <winsock2.h >
 #else
@@ -33,7 +33,7 @@ struct sockaddr_in net_name_to_address(char *name)
 		addr.sin_port = 0;
     }
 	
-#ifndef LINUX
+#ifndef __linux__
 	if (inet_addr(buf) == INADDR_NONE) {
 #else
 	if (inet_addr(buf, (struct in_addr *)&addr.sin_addr) == INADDR_NONE) {
@@ -239,7 +239,7 @@ void GSLogExit(edict_t *ent)
 		GSCloseLog();
 	}
 }
-#ifndef LINUX
+#ifndef __linux__
 int wsock32state(int mode)
 {
     if ( mode == 1 ) 
