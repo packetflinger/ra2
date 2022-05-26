@@ -34,7 +34,6 @@ HEADERS := \
 	g_local.h \
 	gslog.h \
 	m_actor.h \
-	marena.h \
 	m_berserk.h \
 	m_boss2.h \
 	m_boss31.h \
@@ -73,7 +72,6 @@ OBJS := \
 	g_monster.o \
 	g_phys.o \
 	g_save.o \
-	gslog.o \
 	gslogx.o \
 	g_spawn.o \
 	g_svcmds.o \
@@ -84,7 +82,6 @@ OBJS := \
 	g_weapon.o \
 	m_actor.o \
 	maploop.o \
-	marena.o \
 	m_berserk.o \
 	m_boss2.o \
 	m_boss31.o \
