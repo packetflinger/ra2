@@ -14,9 +14,10 @@
 #define h_addr h_addr_list[0]
 #endif
 
+#include <errno.h>
+
 FILE	*StdLogFile;		//GSLogMod
 static fd_set global_fds;
-extern int errno;
 
 struct sockaddr_in net_name_to_address(char *name)
 {
